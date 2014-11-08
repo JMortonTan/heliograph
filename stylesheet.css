@@ -5,4 +5,14 @@
     background-color: #336699;
     font-family: Arial;
     color: #FFFFFF;
+	text-align: center;
+}
+
+#main{
+	margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
 }
