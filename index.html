@@ -44,7 +44,7 @@
         });
     };
 	
-	flareObj = function(user, hero, description, category, longitude, latitude) {
+	flareObj = function(user, hero, description, category, latitude, longitude) {
 		this.id = new Date().getTime();
 		this.user = user;
 		this.hero = hero;
@@ -62,11 +62,7 @@
   				window.latitude = position.coords.latitude;
   				window.longitude = position.coords.longitude;
   
-				var divLong = document.getElementById('longDiv');
-				divLong.textContent = longitude;
-				
-				var divLat = document.getElementById('latDiv');
-				divLat.textContent = latitude;
+				alert("true!");
 			}
 
 			function errorHandler(err) {
