@@ -5,30 +5,6 @@
 <script src="https://kandy-portal.s3.amazonaws.com/public/javascript/fcs/1.0.0/fcs.js" ></script>
 <script src="https://kandy-portal.s3.amazonaws.com/public/javascript/kandy/1.1.2/kandy.js" ></script>
 
-			<script type="text/javascript">
-			function showLocation(position) {
-  				var latitude = position.coords.latitude;
-  				var longitude = position.coords.longitude;
-			}
-
-			function errorHandler(err) {
-  				if(err.code == 1) {
-    					alert("Error: Access is denied!");
-  				} else if( err.code == 2) {
-    					alert("Error: Position is unavailable!");
-  				}
-			}
-
-			function getLocation() {
-				if(navigator.geolocation) {
-      					// timeout at 60000 milliseconds (30 seconds)
-      					var options = {timeout:30000};
-      					navigator.geolocation.getCurrentPosition(showLocation, errorHandler, options);
-   				} else {
-      					alert("Sorry, browser does not support geolocation!");
-   				}
-			}
-			</script>
 
 <script language = "JavaScript">
 
@@ -68,18 +44,40 @@
         });
     };
 	
-	flareObj = function(commoner, hero, description, category) {
+	flareObj = function(commoner, hero, description, category, latitude, longitude) {
 		this.id = new Date().getTime();
 		this.commoner = commoner;
 		this.description = hero;
 		this.string = description;
 		this.category = category;
-		this.longitude = position.coords.longitude;
-		this.latitude = position.coords.latitude;
+		this.longitude = longitude;
+		this.latitude = latitude;
 }
     	
 	function flareSubmit() {
-		var flare = new flareObj('$loggedInAs', null, document.getElementById('desc').value, document.getElementById('cat').value);
+			function errorHandler(err) {
+  				if(err.code == 1) {
+    					alert("Error: Access is denied!");
+  				} else if( err.code == 2) {
+    					alert("Error: Position is unavailable!");
+  				}
+			}
+
+			function getLocation() {
+				if(navigator.geolocation) {
+      					// timeout at 60000 milliseconds (30 seconds)
+      					var options = {timeout:30000};
+      					navigator.geolocation.getCurrentPosition(showLocation, errorHandler, options);
+   				} else {
+      					alert("Sorry, browser does not support geolocation!");
+   				}
+			}
+			
+			
+  				var latitude = position.coords.latitude;
+  				var longitude = position.coords.longitude;
+			
+		var flare = new flareObj('$loggedInAs', null, document.getElementById('desc').value, document.getElementById('cat').value, latitude, longitude);
 		var flareStr = JSON.stringify(flare);
 		
 		sendIm(flareStr);
@@ -101,7 +99,7 @@
     sendImToUser = function(userName, flare) {
         var uuid = KandyAPI.Phone.sendIm(userName, flare,
                 function(result) {
-                    alert('IM sent to '+ userName);
+                    //alert('IM sent to '+ userName);
                 },
                 function() {
                     alert("IM send failed");
