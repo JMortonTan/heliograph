@@ -100,12 +100,8 @@
                                     '<span class="imUsername">' + username + '</span>' +
                                     '<span class="imMessage">' + msg + '</span>' +
                                     '</div>');
-									
-							//if(flare != null)
-								$('#messages').append('<form>' +
-									'<input type="button" id="Be the Hero" value="respond" onclick = "return(false)">' +
-									'<form>');
-							//}
+								
+								$(#feed).append('<tr><td id = "timestamp">'+new Date(flare.id)+'</td><td>'+flare.user+'</td><td><input type="button" id="Be the Hero" value="respond" onclick = "return(false)"></td></tr>
 							
                         } else {
                             //alert("received " + msg.messageType + ": ");
@@ -211,7 +207,9 @@
         Message: <input id= "imMessageToSend" type="text"/>
         <input type="submit" onclick="flareSubmit();return false;" value="Send"/>  <br/>
     </form>
-    <div id="messages" style="width:500px"></div>
+    <div id="messages" style="width:100%"></div>
 </div>
+
+	<table id="feed" style = "width: 100%"></table>
 </body>
 </html>
