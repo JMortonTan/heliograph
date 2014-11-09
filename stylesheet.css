@@ -41,11 +41,12 @@ body {
 }
 
 #main-form {
+	color: #FFFFFF;
 	margin: 0 auto;
 	border: 0px solid #65C9EB;
 	height: 400px;
 	width: 500px;
-	margin-top: 100px;
+	margin-top: 35px;
 	text-align: center;
 	padding: 30px;
 	padding-top: 50px;
