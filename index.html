@@ -44,45 +44,17 @@
         });
     };
 	
-	flareObj = function(user, hero, description, category, latitude, longitude) {
+	flareObj = function(user, hero, description, category) {
 		this.id = new Date().getTime();
 		this.user = user;
 		this.hero = hero;
 		this.description = description;
 		this.category = category;
-		this.latitude = latitude;
-		this.longitude = longitude;
 }
     	
 	function flareSubmit() {
-		var latitude;
-		var longitude;
-		
-		getLocation();
-		
-		function showLocation(position) {
-  				latitude = position.coords.latitude;
-  				longitude = position.coords.longitude;
-			}
 
-			function errorHandler(err) {
-  				if(err.code == 1) {
-    					alert("Error: Access is denied!");
-  				} else if( err.code == 2) {
-    					alert("Error: Position is unavailable!");
-  				}
-			}
-
-			function getLocation() {
-				if(navigator.geolocation) {
-      					// timeout at 60000 milliseconds (60 seconds)
-      					var options = {timeout:60000};
-      					navigator.geolocation.getCurrentPosition(showLocation(), errorHandler, options);
-   				} else {
-      					alert("Sorry, browser does not support geolocation!");
-   				}
-			}
-		var flare = new flareObj($('#logInId').val(), null, document.getElementById('desc').value, document.getElementById('cat').value, latitude, longitude);
+		var flare = new flareObj($('#logInId').val(), null, document.getElementById('desc').value, document.getElementById('cat').value);
 		var flareStr = JSON.stringify(flare);
 		
 		sendIm(flareStr);
@@ -129,7 +101,7 @@
                                     '</div>');
 								
 								$('#feed').append('<tr><td id = "timestamp">'+new Date(flare.id)+'</td><td>'+flare.category+'</td><td>'+flare.user+'</td><td>'+flare.hero+
-															'</td><td><input type="button" id="Be the Hero" value="respond" onclick = "respond(msg); return(false);"></td></tr>');
+															'</td><td><input type="button" id="Be the Hero" value="respond" onclick = "respond(data.messages[i].message.text); return(false);"></td></tr>');
 							
                         } else {
                             //alert("received " + msg.messageType + ": ");
