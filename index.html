@@ -188,40 +188,43 @@
     }
 </script>
 
-<style>
-    #domainApiId{width:200px;margin-bottom:1px}
-    #logInId{width:200px;margin:0 0 1px 64px;}
-    #passwd{width:200px;margin-left: 41px;}
-    #loginBtn{width:90px;height:23px;margin:5px 0 5px 110px;}
-    .imUsername{display:inline-block; width:100px}
-    #imMessageToSend{width:175px}
-    #messages{border: solid black 1px}
-    .imMessage{display:inline-block; width:275px}
-    #logoutBtn{width:90px;height:23px;}
-</style>
-</head>
+		<style>
+			#domainApiId{width:200px;margin-bottom:1px}
+			#logInId{width:200px;margin:0 0 1px 64px;}
+			#passwd{width:200px;margin-left: 41px;}
+			#loginBtn{width:90px;height:23px;margin:5px 0 5px 110px;}
+			.imUsername{display:inline-block; width:100px}
+			#imMessageToSend{width:175px}
+			#messages{border: solid black 1px}
+			.imMessage{display:inline-block; width:275px}
+			#logoutBtn{width:90px;height:23px;}
+		</style>
+	</head>
 
-<body id=main onload="setup()" style="width:500px;">
-<h2>Heliograph</h2>
+	<body id=main onload="setup()" style="width:500px;">
+		<h2>Heliograph</h2>
 
-<div id="loggedIn" style="display:none">
-   Hello <span id="loggedInAs"></span>. &nbsp;&nbsp;&nbsp;&nbsp;
-    <input id="logoutBtn" type="button" value="Log Out" onclick="logout()" />
-</div>
-<form id="loginForm">
-    Username: <input id="logInId" type="text"/><br/>
-    Password: <input id="passwd" type="password"/><br/>
-    <input id="loginBtn" type="button" value="Log in" onclick="login();return false;"/>
-</form>
-<br/>
-<br/>
-<div id="chat" style="display:none">
-    <form id="imForm" onsubmit="return false;">
-        Contact: <select id="imToUser"/></select>&nbsp;
-        Message: <input id= "imMessageToSend" type="text"/>
-        <input type="submit" onclick="sendIm();return false;" value="Send"/>  <br/>
-    </form>
-    <div id="messages" style="width:500px"></div>
-</div>
-</body>
+		<div id="loggedIn" style="display:none">
+		   Hello <span id="loggedInAs"></span>. &nbsp;&nbsp;&nbsp;&nbsp;
+			<input id="logoutBtn" type="button" value="Log Out" onclick="logout()" />
+		</div>
+		
+		<form id="loginForm">
+			Username: <input id="logInId" type="text"/><br/>
+			Password: <input id="passwd" type="password"/><br/>
+			<input id="loginBtn" type="button" value="Log in" onclick="login();return false;"/>
+		</form>
+		
+		<br/>
+		<br/>
+		
+		<div id="chat" style="display:none">
+			<form id="imForm" onsubmit="return false;">
+				Contact: <select id="imToUser"/></select>&nbsp;
+				Message: <input id= "imMessageToSend" type="text"/>
+				<input type="submit" onclick="sendIm();return false;" value="Send"/>  <br/>
+			</form>
+			<div id="messages" style="width:500px"></div>
+		</div>
+	</body>
 </html>
