@@ -1,6 +1,6 @@
 
 Flare = function(commoner, description) {
-    this.id = 0;
+    this.id = new Date().getTime();
     this.commoner = commoner;
     this.description = description;
 }
@@ -10,8 +10,11 @@ function flareSubmit() {
                           $('#loginBtn').val());
 
     var flareStr = JSON.stringify(flare);
-    sendIm('user1@domain.com', flareStr);
-    sendIm('user1@domain.com', flareStr);
+    sendIm('user1@heliograph2.com', flareStr);
+    sendIm('user2@heliograph2.com', flareStr);
+	sendIm('user3@heliograph2.com', flareStr);
+	sendIm('user4@heliograph2.com', flareStr);
+	sendIm('user5@heliograph2.com', flareStr);
 }
 
 /* when you receive a flare IM, make it an object like this
