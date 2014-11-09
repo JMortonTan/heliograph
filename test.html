@@ -20,10 +20,10 @@
 <script type="text/javascript">
   function signinCallback(authResult) {
     if (authResult['status']['signed_in']) {
-      document.write("Signed in.");
+      document.getElementById("mySpanId").innerHTML="Signed in.";
 
     } else {
-      document.write("Signed  out.");
+      document.getElementById("mySpanId").innerHTML="Signed  out.";
     }
   }
 </script>
@@ -39,6 +39,7 @@
 			<h2>Heliograph</h2>
 			<div><p><button onclick="logout();">Logout</button></p></div>
 			<div><p><button onclick="signinCallback">Test</button></p></div>
+			<span id=mySpanId></span>
 		</div>
 	</body>
 </html>
