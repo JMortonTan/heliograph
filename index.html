@@ -48,7 +48,7 @@ var flare = flareStr = JSON.parse(flareStr);
     }
 
     login = function() {
-        KandyAPI.Phone.login($("DAK63ed5440255241d88666c634650bda4e").val(), $("#logInId").val(), $('#passwd').val());
+        KandyAPI.Phone.login("DAK63ed5440255241d88666c634650bda4e", $("#logInId").val(), $('#passwd').val());
     }
 
     logout = function() {
