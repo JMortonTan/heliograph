@@ -5,6 +5,31 @@
 <script src="https://kandy-portal.s3.amazonaws.com/public/javascript/fcs/1.0.0/fcs.js" ></script>
 <script src="https://kandy-portal.s3.amazonaws.com/public/javascript/kandy/1.1.2/kandy.js" ></script>
 
+			<script type="text/javascript">
+			function showLocation(position) {
+  				var latitude = position.coords.latitude;
+  				var longitude = position.coords.longitude;
+			}
+
+			function errorHandler(err) {
+  				if(err.code == 1) {
+    					alert("Error: Access is denied!");
+  				} else if( err.code == 2) {
+    					alert("Error: Position is unavailable!");
+  				}
+			}
+
+			function getLocation() {
+				if(navigator.geolocation) {
+      					// timeout at 60000 milliseconds (30 seconds)
+      					var options = {timeout:30000};
+      					navigator.geolocation.getCurrentPosition(showLocation, errorHandler, options);
+   				} else {
+      					alert("Sorry, browser does not support geolocation!");
+   				}
+			}
+			</script>
+
 <script language = "JavaScript">
 
 	$.urlParam = function(name){
@@ -49,6 +74,8 @@
 		this.description = hero;
 		this.string = description;
 		this.category = category;
+		this.longitude = position.coords.longitude;
+		this.latitude = position.coords.latitude;
 }
     	
 	function flareSubmit() {
@@ -188,7 +215,7 @@
 <div id="chat" style="display:none">
     <form id="imForm" onsubmit="return false;">
 		Category: <select id="cat" name="tags">
-			 <option value="auto">Automobile</option>
+			 <option value="automotive">Automotive</option>
 			 <option value="cleaning">Cleaning</option>
 			 </select>
 
