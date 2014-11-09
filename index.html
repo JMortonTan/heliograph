@@ -135,8 +135,7 @@ KandyAPI.Phone.addToPersonalAddressBook(
                 },
                 function() {
                     alert("IM send failed");
-                }
-        );
+                };
 		
 		var uuid = KandyAPI.Phone.sendIm('user2@heliograph2.com', $('#imMessageToSend').val(),
                 function(result) {
@@ -151,8 +150,7 @@ KandyAPI.Phone.addToPersonalAddressBook(
                 },
                 function() {
                     alert("IM send failed");
-                }
-        );
+                };
 		
 		var uuid = KandyAPI.Phone.sendIm('user3@heliograph2.com', $('#imMessageToSend').val(),
                 function(result) {
@@ -167,8 +165,7 @@ KandyAPI.Phone.addToPersonalAddressBook(
                 },
                 function() {
                     alert("IM send failed");
-                }
-        );
+                };
 		
 		var uuid = KandyAPI.Phone.sendIm('user4@heliograph2.com', $('#imMessageToSend').val(),
                 function(result) {
@@ -183,8 +180,7 @@ KandyAPI.Phone.addToPersonalAddressBook(
                 },
                 function() {
                     alert("IM send failed");
-                }
-        );
+                };
 		
 		var uuid = KandyAPI.Phone.sendIm('user5@heliograph2.com', $('#imMessageToSend').val(),
                 function(result) {
@@ -200,8 +196,8 @@ KandyAPI.Phone.addToPersonalAddressBook(
 				function() {
 					alert("IM send failed");
 				}
-        );
-    };
+	);
+ 
 
     getIms = function() {
         KandyAPI.Phone.getIm(
@@ -248,6 +244,7 @@ KandyAPI.Phone.addToPersonalAddressBook(
                 break;
         }
     }
+}
 </script>
 
 <style>
@@ -285,6 +282,6 @@ KandyAPI.Phone.addToPersonalAddressBook(
     </form>
     <div id="messages" style="width:500px"></div>
 </div>
-<p>Testing 0.04</p<
+<p>Testing 0.041</p<
 </body>
 </html>
