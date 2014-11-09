@@ -1,5 +1,3 @@
-/*Copyright 2014 by Jonathan Tan. All rights reserved.*/
-
 /*Global style*/
 * {
     background-color: #336699;
@@ -30,7 +28,6 @@ a:hover{
 	color: #FFA500;
 }
 
-
 /* Maps */
 #map {
     width: 50%;
@@ -39,5 +36,52 @@ a:hover{
 
 #map-canvas {
     height: 100%;
+}
+
+/* Flare */
+#flare-container {
+	margin: 0 auto;
+	width: 60%;
+}
+
+#flare-left {
+	width: 49%;
+	float: left;
+	text-align: right;
+	margin-top: 50px;
+}
+
+#flare-right {
+	width: 49%;
+	float: right;
+	text-align: left;
+	margin-top: 50px;
+	padding-top: 20px;
+}
+
+span#flare-title {
+	font-size: 18px;
+	padding-right: 50px;
+}
+
+select {
+	border: 1px solid #000000;
+	background-color: #FFFFFF;
+	color: #000000;
+}
+
+input {
+	border: 1px solid #000238;
+	background-color: #FFFFFF;
+	color: #000000;
+	font-size: 16px;
+	margin-top: 20px;
+}
+
+textarea {
+	border: 1px solid #000238;
+	background-color: #FFFFFF;
+	color: #000000;
+	text-align: left;
 }
 
