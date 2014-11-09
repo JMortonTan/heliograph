@@ -94,14 +94,19 @@
                             var username = data.messages[i].sender.user_id;
                             var msg = data.messages[i].message.text
 							
+							var flare =  JSON.parse(msg);
 
                             $('#messages').append('<div>' +
                                     '<span class="imUsername">' + username + '</span>' +
                                     '<span class="imMessage">' + msg + '</span>' +
                                     '</div>');
 									
-							var flare =  JSON.parse(msg);
-							alert(flare.id);
+							if(flare != null) {
+								$('#message').append('<form action="return false">' +
+									'<input type="button" id="respond" value="respond">' +
+									'<form>');
+							}
+							
                         } else {
                             //alert("received " + msg.messageType + ": ");
                         }
