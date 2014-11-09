@@ -43,43 +43,17 @@
         });
     };
 	
-	flareObj = function(user, hero, description, category, longitude, latitude ) {
+	flareObj = function(user, hero, description, category) {
 		this.id = new Date().getTime();
 		this.user = user;
 		this.hero = hero;
 		this.description = description;
 		this.category = category;
-		this.latitude = latitude;
-		this.longitude = longitude;
 }
     	
 	function flareSubmit() {
-						
-			function showLocation(position) {
-  				var window.latitude = position.coords.latitude;
-  				var window.longitude = position.coords.longitude;
-			}
-
-			function errorHandler(err) {
-  				if(err.code == 1) {
-    					alert("Error: Access is denied!");
-  				} else if( err.code == 2) {
-    					alert("Error: Position is unavailable!");
-  				}
-			}
-
-			function getLocation() {
-				if(navigator.geolocation) {
-      					// timeout at 60000 milliseconds (60 seconds)
-      					var options = {timeout:60000};
-      					navigator.geolocation.getCurrentPosition(showLocation, errorHandler, options);
-   				} else {
-      					alert("Sorry, browser does not support geolocation!");
-   				}
-			}
 		
-
-		var flare = new flareObj($('#logInId').val(), null, document.getElementById('desc').value, document.getElementById('cat').value, window.longitude, window.latitude);
+		var flare = new flareObj($('#logInId').val(), null, document.getElementById('desc').value, document.getElementById('cat').value,);
 		var flareStr = JSON.stringify(flare);
 		
 		sendIm(flareStr);
