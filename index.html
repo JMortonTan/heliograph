@@ -114,6 +114,7 @@
                 $('#messages').empty();
                 $("#myContacts div:not(:first)").remove();
                 $("#chat").hide();
+				$("messages").hide();
                 break;
             case 'LOGGED_IN':
                 $('#loggedInAs').text($('#logInId').val());
@@ -183,9 +184,7 @@
 </form>
 <br/>
 <br/>
-<div id="messages" style="width:500px">
-	    	User: <span id="loggedInAs"></span>
-		
+<div id="messages" style="width:500px" style="display:none">		
 		<br /><br />
 
 		Category: <select name="tags">
