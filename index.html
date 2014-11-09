@@ -19,7 +19,7 @@
 			<div id="main-form">
 				
 				<!-- LOGGED OUT -->				
-				<form id="loginForm" style="display:none">
+				<form id="loginForm">
 					<span id="login-title">Welcome Guest! Please login.</span>
 		
 					<br /> <br /><br /><br />
@@ -34,10 +34,10 @@
 				</form>
 
 				<!-- LOGGED IN -->
-				<div id="loggedIn">
+				<div id="loggedIn" style="display:none">
 		   			<span id="login-text">Welcome <span id="loggedInAs"></span>!.</span>
 
-					<br /><br /><br />					
+					<br /><br />					
 
 					<input id="logoutBtn" type="button" value="Log Out" onclick="logout()" />
 				</div>
@@ -62,7 +62,7 @@
 				</div>
 
 				<!-- MESSAGES -->
-				<div id="messages" style="width:500px" style = "display:none"></div>
+				<div id="messages" style="width:500px" style="display:none"></div>
 
 				<!-- TABLE -->
 				<table id="feed" style = "width: 100%"></table>
