@@ -1,21 +1,17 @@
 
 Flare = function(commoner, description) {
     this.id = 0;
-   // this.commoner = commoner;
-   // this.description = description;
+    this.commoner = commoner;
+    this.description = description;
 }
 
 function flareSubmit() {
-    var flare = new Flare($('#loggedInAs').val(), $('#loginBtn').val());
+    var flare = new Flare($('#loggedInAs').val(),
+                          $('#loginBtn').val());
 
     var flareStr = JSON.stringify(flare);
-    this.id = new Date().getTime();
-
     sendIm('user1@domain.com', flareStr);
-    sendIm('user2@domain.com', flareStr);
-    sendIm('user3@domain.com', flareStr);
-    sendIm('user4@domain.com', flareStr);
-    sendIm('user5@domain.com', flareStr);
+    sendIm('user1@domain.com', flareStr);
 }
 
 /* when you receive a flare IM, make it an object like this
@@ -117,19 +113,74 @@ KandyAPI.Phone.addToPersonalAddressBook(
     sendIm = function() {
         var uuid = KandyAPI.Phone.sendIm('user1@heliograph2.com', $('#imMessageToSend').val(),
                 function(result) {
-                    //$('#messages').append('<div>' +
-                      //      '<span class="imUsername">' + $('#logInId').val() + '</span>' +
-                        //    '<span class="imMessage">' + $('#imMessageToSend').val() + '</span>' +
-                          //  '</div>');
-                    //$('#imMessageToSend').val('');
+                    $('#messages').append('<div>' +
+                            '<span class="imUsername">' + $('#logInId').val() + '</span>' +
+                            '<span class="imMessage">' + $('#imMessageToSend').val() + '</span>' +
+                            '</div>');
+                    $('#imMessageToSend').val('');
                     //alert('sent, msgID=' + uuid);
-	     flareSubmit();
                 },
                 function() {
                     alert("IM send failed");
                 }
-          );
-    }
+        );
+		
+		var uuid = KandyAPI.Phone.sendIm('user2@heliograph2.com', $('#imMessageToSend').val(),
+                function(result) {
+                    $('#messages').append('<div>' +
+                            '<span class="imUsername">' + $('#logInId').val() + '</span>' +
+                            '<span class="imMessage">' + $('#imMessageToSend').val() + '</span>' +
+                            '</div>');
+                    $('#imMessageToSend').val('');
+                    //alert('sent, msgID=' + uuid);
+                },
+                function() {
+                    alert("IM send failed");
+                }
+        );
+		
+		var uuid = KandyAPI.Phone.sendIm('user3@heliograph2.com', $('#imMessageToSend').val(),
+                function(result) {
+                    $('#messages').append('<div>' +
+                            '<span class="imUsername">' + $('#logInId').val() + '</span>' +
+                            '<span class="imMessage">' + $('#imMessageToSend').val() + '</span>' +
+                            '</div>');
+                    $('#imMessageToSend').val('');
+                    //alert('sent, msgID=' + uuid);
+                },
+                function() {
+                    alert("IM send failed");
+                }
+        );
+		
+		var uuid = KandyAPI.Phone.sendIm('user4@heliograph2.com', $('#imMessageToSend').val(),
+                function(result) {
+                    $('#messages').append('<div>' +
+                            '<span class="imUsername">' + $('#logInId').val() + '</span>' +
+                            '<span class="imMessage">' + $('#imMessageToSend').val() + '</span>' +
+                            '</div>');
+                    $('#imMessageToSend').val('');
+                    //alert('sent, msgID=' + uuid);
+                },
+                function() {
+                    alert("IM send failed");
+                }
+        );
+		
+		var uuid = KandyAPI.Phone.sendIm('user5@heliograph2.com', $('#imMessageToSend').val(),
+                function(result) {
+                    $('#messages').append('<div>' +
+                            '<span class="imUsername">' + $('#logInId').val() + '</span>' +
+                            '<span class="imMessage">' + $('#imMessageToSend').val() + '</span>' +
+                            '</div>');
+                    $('#imMessageToSend').val('');
+                    //alert('sent, msgID=' + uuid);
+                },
+                function() {
+                    alert("IM send failed");
+                }
+        );
+    };
 
     getIms = function() {
         KandyAPI.Phone.getIm(
