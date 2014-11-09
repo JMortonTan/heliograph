@@ -7,6 +7,7 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script src="https://kandy-portal.s3.amazonaws.com/public/javascript/fcs/1.0.0/fcs.js" ></script>
 		<script src="https://kandy-portal.s3.amazonaws.com/public/javascript/kandy/1.1.2/kandy.js" ></script>
+		<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
 		
 		<script type="text/javascript">
 		
@@ -167,6 +168,7 @@
                 $("#myContacts div:not(:first)").remove();
                 $("#chat").hide();
 				$("#messages").hide();
+				$("#map").hide();
                 break;
             case 'LOGGED_IN':
                 $('#loggedInAs').text($('#logInId').val());
@@ -175,6 +177,7 @@
                 $('#contactsAndDirSearch').show();
                 $("#chat").show();
 				$("#messages").hide();
+				$("#map").show();
                 break;
         }
     }
@@ -207,6 +210,39 @@
     });
 		
 		</script>
+		  <script type="text/javascript">
+
+    displayFakeFlaresOnMap(){
+        var locations = [
+        ['User 1', 40.743518, -74.176147, 4],
+        ['User 2', 40.737763, -74.187037, 5],
+        ['User 3', 40.732414, -74.177080, 3],
+        ['User 4', 40.742315, -74.178722, 2],
+        ];
+
+	var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 13,
+        center: new google.maps.LatLng(-33.92, 151.25),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+	var infowindow = new google.maps.InfoWindow();
+        for (i = 0; i < locations.length; i++) {
+                marker = new google.maps.Marker({
+                position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                map: map
+        });
+
+         google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                return function() {
+                infowindow.setContent(locations[i][0]);
+                infowindow.open(map, marker);
+                 }})(marker, i));
+
+        }  //end of for loop
+   }
+
+  </script>
 	</head>
 
 	<body onload="setup()">
@@ -267,6 +303,9 @@
 				<br/><br/>
 				<!-- TABLE -->
 				<table id="feed" style = "width: 100%"></table>
+				
+				<br/><br/><br/>
+				<div id="map" style="display: none; width: 600px; height: 600px;"></div>
 			</div>
 		</div>
 	</body>
