@@ -115,13 +115,13 @@
         )
     };
 	
-	respond = function(flare){
+	respond = function(msg){
+		var flare =  JSON.parse(msg);
+		
 		flare.hero = $("#logInId").val();
 		var flareStr = JSON.stringify(flare);
 		
-		sendIm(flareStr);
-		
-		
+		sendIm(flareStr);		
 		}
 		
 
