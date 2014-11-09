@@ -6,17 +6,16 @@ Flare = function(commoner, description) {
 }
 
 function flareSubmit() {
-    var flare = new Flare($('#loggedInAs').val(),
-                          $('#loginBtn').val());
+    var flare = new Flare($('#loggedInAs').val(), $('#loginBtn').val());
 
     var flareStr = JSON.stringify(flare);
     this.id = new Date().getTime();
 
     sendIm('user1@domain.com', flareStr);
     sendIm('user2@domain.com', flareStr);
-	sendIm('user3@domain.com', flareStr);
-	sendIm('user4@domain.com', flareStr);
-	sendIm('user5@domain.com', flareStr);
+    sendIm('user3@domain.com', flareStr);
+    sendIm('user4@domain.com', flareStr);
+    sendIm('user5@domain.com', flareStr);
 }
 
 /* when you receive a flare IM, make it an object like this
@@ -124,12 +123,13 @@ KandyAPI.Phone.addToPersonalAddressBook(
                           //  '</div>');
                     //$('#imMessageToSend').val('');
                     //alert('sent, msgID=' + uuid);
+	     flareSubmit();
                 },
                 function() {
                     alert("IM send failed");
                 }
-        );
-		}
+          );
+    }
 
     getIms = function() {
         KandyAPI.Phone.getIm(
