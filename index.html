@@ -73,7 +73,7 @@
     sendImToUser = function(userName, flare) {
         var uuid = KandyAPI.Phone.sendIm(userName, flare,
                 function(result) {
-                    //alert('IM sent to '+ userName);
+                    alert('IM sent to '+ userName);
                 },
                 function() {
                     alert("IM send failed");
