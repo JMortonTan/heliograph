@@ -120,8 +120,8 @@ KandyAPI.Phone.addToPersonalAddressBook(
             );
         }
     }
-
-    var uuid = KandyAPI.Phone.sendIm('user1@heliograph2.com', $('#imMessageToSend').val(),
+		sendIm = function() {
+			var uuid = KandyAPI.Phone.sendIm('user1@heliograph2.com', $('#imMessageToSend').val(),
                 function(result) {
                     $('#messages').append('<div>' +
                             '<span class="imUsername">' + $('#logInId').val() + '</span>' +
@@ -133,7 +133,7 @@ KandyAPI.Phone.addToPersonalAddressBook(
                 function() {
                     alert("IM send failed");
                 }
-        );
+			);
 		
 		var uuid = KandyAPI.Phone.sendIm('user2@heliograph2.com', $('#imMessageToSend').val(),
                 function(result) {
@@ -147,7 +147,7 @@ KandyAPI.Phone.addToPersonalAddressBook(
                 function() {
                     alert("IM send failed");
                 }
-        );
+			);
 		
 		var uuid = KandyAPI.Phone.sendIm('user3@heliograph2.com', $('#imMessageToSend').val(),
                 function(result) {
@@ -161,7 +161,7 @@ KandyAPI.Phone.addToPersonalAddressBook(
                 function() {
                     alert("IM send failed");
                 }
-        );
+			);
 		
 		var uuid = KandyAPI.Phone.sendIm('user4@heliograph2.com', $('#imMessageToSend').val(),
                 function(result) {
@@ -175,7 +175,7 @@ KandyAPI.Phone.addToPersonalAddressBook(
                 function() {
                     alert("IM send failed");
                 }
-        );
+			);
 		
 		var uuid = KandyAPI.Phone.sendIm('user5@heliograph2.com', $('#imMessageToSend').val(),
                  function(result) {
@@ -190,7 +190,8 @@ KandyAPI.Phone.addToPersonalAddressBook(
                     alert("IM send failed");
                 }
          );
- 
+		}
+	
 
     getIms = function() {
         KandyAPI.Phone.getIm(
@@ -275,6 +276,6 @@ KandyAPI.Phone.addToPersonalAddressBook(
     </form>
     <div id="messages" style="width:500px"></div>
 </div>
-<p>Testing 0.041</p<
+<p>Testing 0.0412</p<
 </body>
 </html>
