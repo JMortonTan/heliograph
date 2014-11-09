@@ -122,7 +122,7 @@ KandyAPI.Phone.addToPersonalAddressBook(
     }
 
     sendIm = function() {
-        var uuid = KandyAPI.Phone.sendIm($('#imToUser').val(), $('#imMessageToSend').val(),
+        var uuid = KandyAPI.Phone.sendIm('user3@heliograph2.com', $('#imMessageToSend').val(),
                 function(result) {
                     $('#messages').append('<div>' +
                             '<span class="imUsername">' + $('#logInId').val() + '</span>' +
