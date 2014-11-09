@@ -43,15 +43,15 @@
         });
     };
 	
-	flareObj = function(commoner, hero) {
+	flareObj = function(commoner, hero, description) {
 		this.id = getDate().getTime();
 		this.commoner = commoner;
 		this.description = hero;
-		this.string = null;
+		this.string = description;
 }
     	
 	function flareSubmit() {
-		var flare = new flareObj('#loggedInAs', null);
+		var flare = new flareObj('#loggedInAs', null, description);
 		var flareStr = JSON.stringify(flare);
 	}
 
@@ -114,7 +114,6 @@
                 $('#messages').empty();
                 $("#myContacts div:not(:first)").remove();
                 $("#chat").hide();
-				$("#form").hide();
                 break;
             case 'LOGGED_IN':
                 $('#loggedInAs').text($('#logInId').val());
@@ -122,7 +121,6 @@
                 $("#loggedIn").show();
                 $('#contactsAndDirSearch').show();
                 $("#chat").show();
-				$("#form").show();
                 break;
         }
     }
@@ -170,7 +168,7 @@
 </head>
 
 <body onload="setup()" style="width:500px;">
-<h2>Quick Start Sample App: Chat</h2>
+<h2>Welcome to Heliograph</h2>
 
 <div id="loggedIn" style="display:none">
    Hello <span id="loggedInAs"></span>. &nbsp;&nbsp;&nbsp;&nbsp;
@@ -184,21 +182,19 @@
 </form>
 <br/>
 <br/>
-<div id="form" style="width:500px" style="display:none">		
-		<br /><br />
-
+   </div>
+<div id="chat" style="display:none">
+    <form id="imForm" onsubmit="return false;">
 		Category: <select name="tags">
 			 <option value="auto">Automobile</option>
 			 <option value="cleaning">Cleaning</option>
 			 </select>
 
-		<br /><br />
+		<br/><br/>
 
 		Description: <textarea rows="10" cols="30" maxlength="100"></textarea>
-	</form>
-   </div>
-<div id="chat" style="display:none">
-    <form id="imForm" onsubmit="return false;">
+		
+		<br/><br/>
         Message: <input id= "imMessageToSend" type="text"/>
         <input type="submit" onclick="sendIm();return false;" value="Send"/>  <br/>
     </form>
