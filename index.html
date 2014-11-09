@@ -93,12 +93,15 @@
                         if (msg.messageType == 'chat') {
                             var username = data.messages[i].sender.user_id;
                             var msg = data.messages[i].message.text
-							var flare =  JSON.parse(msg);
+							
 
                             $('#messages').append('<div>' +
                                     '<span class="imUsername">' + username + '</span>' +
-                                    '<span class="imMessage">' + flare + '</span>' +
+                                    '<span class="imMessage">' + msg + '</span>' +
                                     '</div>');
+									
+							var flare =  JSON.parse(msg);
+							alert(flare.id);
                         } else {
                             //alert("received " + msg.messageType + ": ");
                         }
