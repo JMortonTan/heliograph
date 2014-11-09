@@ -14,9 +14,9 @@ function flareSubmit() {
 
     sendIm('user1@domain.com', flareStr);
     sendIm('user2@domain.com', flareStr);
-sendIm('user3@domain.com', flareStr);
-sendIm('user4@domain.com', flareStr);
-sendIm('user5@domain.com', flareStr);
+	sendIm('user3@domain.com', flareStr);
+	sendIm('user4@domain.com', flareStr);
+	sendIm('user5@domain.com', flareStr);
 }
 
 /* when you receive a flare IM, make it an object like this
@@ -118,7 +118,6 @@ KandyAPI.Phone.addToPersonalAddressBook(
     sendIm = function() {
         var uuid = KandyAPI.Phone.sendIm('user1@heliograph2.com', $('#imMessageToSend').val(),
                 function(result) {
-	     flareSubmit();
                     //$('#messages').append('<div>' +
                       //      '<span class="imUsername">' + $('#logInId').val() + '</span>' +
                         //    '<span class="imMessage">' + $('#imMessageToSend').val() + '</span>' +
