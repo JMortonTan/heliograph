@@ -32,7 +32,25 @@
             }
         });
     }
+	
+	Flare = function(commoner, description) {
+    this.id = 0;
+    this.commoner = commoner;
+    this.description = description;
+}
 
+	function flareSubmit() {
+    var flare = new Flare($('#loggedInAs').val(),
+                          $('#loginBtn').val());
+
+    var flareStr = JSON.stringify(flare);
+    
+}
+	
+	makeFlare = function() {
+		var flare 
+	}
+	
     login = function() {
         KandyAPI.Phone.login($("#domainApiId").val(), $("#logInId").val(), $('#passwd').val());
     }
