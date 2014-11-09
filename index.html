@@ -4,77 +4,138 @@
         <title>Heliograph</title>
 		
 		<!-- All three files required for Kandy  -->
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-		<script src="https://kandy-portal.s3.amazonaws.com/public/javascript/fcs/1.0.0/fcs.js" ></script>
-		<script src="https://kandy-portal.s3.amazonaws.com/public/javascript/kandy/1.1.2/kandy.js" ></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="https://kandy-portal.s3.amazonaws.com/public/javascript/fcs/1.0.0/fcs.js" ></script>
+<script src="https://kandy-portal.s3.amazonaws.com/public/javascript/kandy/1.1.2/kandy.js" ></script>
 
-		<!-- Flare Object -->
-		<script language = "JavaScript">
-			Flare = function(commoner, description) {
-			this.id = 0;
-			this.commoner = commoner;
-			this.description = description;
-		}
+<script language = "JavaScript">
 
-		function flareSubmit() {
-		var flare = new Flare($('#loggedInAs').val(),
-										$('#loginBtn').val());
+Flare = function(commoner, description) {
+    this.id = 0;
+    this.commoner = commoner;
+    this.description = description;
+}
 
-		var flareStr = JSON.stringify(flare);
-		sendIm('user1@domain.com', flareStr);
-		sendIm('user2@domain.com', flareStr);
-		sendIm('user3@domain.com', flareStr);
-		sendIm('user4@domain.com', flareStr);
-		sendIm('user5@domain.com', flareStr);
-		}
+function flareSubmit() {
+    var flare = new Flare($('#loggedInAs').val(),
+                          $('#loginBtn').val());
 
-		/* when you receive a flare IM, make it an object like this
-		var flare = flareStr = JSON.parse(flareStr);
-		...then construct some HTML (a form to respond to a flare) and append it to a div tag
-		*/
+    var flareStr = JSON.stringify(flare);
+    sendIm('user1@domain.com', flareStr);
+    sendIm('user1@domain.com', flareStr);
+}
 
-		// this is called when page is done loading to set up (initialize) the KandyAPI.Phone
-		
-		setup = function() {
+/* when you receive a flare IM, make it an object like this
+var flare = flareStr = JSON.parse(flareStr);
+...then construct some HTML (a form to respond to a flare) and append it to a div tag
+*/
+
+    // this is called when page is done loading to set up (initialize) the KandyAPI.Phone
+    setup = function() {
 
         // initialize KandyAPI.Phone, passing a config JSON object that contains listeners (event callbacks)
         KandyAPI.Phone.setup({
             // respond to Kandy events...
             listeners: {
-					loginsuccess: function () {
-						changeUIState('LOGGED_IN');
-						setInterval(getIms, 5000);
-					},
-					loginfailed: function () { alert("Login failed");}
-				}
-			});
-		}
+                loginsuccess: function () {
+                    changeUIState('LOGGED_IN');
+                    loadContacts();
+                    setInterval(getIms, 5000);
+                },
+                loginfailed: function () { alert("Login failed");}
+            }
+        });
+    }
 
-		login = function() {
-			KandyAPI.Phone.login("DAK63ed5440255241d88666c634650bda4e", $("#logInId").val(), $('#passwd').val());
-		}
+    login = function() {
+        KandyAPI.Phone.login($("DAK63ed5440255241d88666c634650bda4e").val(), $("#logInId").val(), $('#passwd').val());
+    }
 
-		logout = function() {
-			KandyAPI.Phone.logout(function () {
-				changeUIState('LOGGED_OUT');
-			});
-		}
+    logout = function() {
+        KandyAPI.Phone.logout(function () {
+            changeUIState('LOGGED_OUT');
+        });
+    }
 
-		sendIm = function() {
-			var uuid = KandyAPI.Phone.sendIm(user4@heliograph2.com, $('#imMessageToSend').val(),
-					function(result) {
-						$('#messages').append('<div>' +
-								'<span class="imUsername">' + $('#logInId').val() + '</span>' +
-								'<span class="imMessage">' + $('#imMessageToSend').val() + '</span>' +
-								'</div>');
-						$('#imMessageToSend').val('');
-						alert('Flare sent!');
-					},
-					function() {
-						alert("IM send failed");
-					}
-			);
-		};
+    loadContacts = function() {
+        KandyAPI.Phone.retrievePersonalAddressBook(
+                function(results) {
+                    // clear out the current address book list
+                    $("#myContacts div:not(:first)").remove();
+                    var div = null;
+                    if (results.length == 0) {
+                        div = "<div class='noresults'>-- No Contacts --</div>"
+                        $('#myContacts').append(div);
+                    } else {
+                        for (i = 0; i < results.length; i++) {
+                            $('#imToUser').append(
+                                    '<option value="' + results[i].primaryContact  + '">' + results[i].nickname +'</option>'
+                            );
+                        }
+                    }
+                },
+                function() { alert("Error");}
+        );
+    }
+
+    var userIdToAddToContacts = null;  // need access to this in anonymous function below
+    addToContacts = function(userId) {
+        userIdToAddToContacts = userId;
+
+        // HTML id can't contain @ and jquery doesn't like periods (in id)
+        if ($('#uid_' + userId.replace(/[.@]/g,'_')).length > 0) {
+            alert("This person is already in your contact list.")
+        } else {
+            // get and AddressBook.Entry object for this contact
+            KandyAPI.Phone.searchDirectoryByUserName(
+                    userId,
+                    function (results) {
+                        for (var i = 0; i < results.length; ++i) {
+                            if (results[i].primaryContact === userIdToAddToContacts) {
+                                // user name and nickname are required
+                                contact = {
+                                    contact_user_name: results[i].primaryContact,
+                                    contact_nickname: results[i].primaryContact
+                                }
+                                if (results[i].firstName) { contact['contact_first_name'] = results[i].firstName; }
+                                if (results[i].lastName) { contact['contact_last_name'] = results[i].lastName; }
+                                if (results[i].homePhone) { contact['contact_home_phone'] = results[i].homePhone; }
+                                if (results[i].mobilePhone) { contact['contact_mobile_number'] = results[i].mobilePhone; }
+                                if (results[i].workPhone) { contact['contact_business_number'] = results[i].workPhone; }
+                                if (results[i].fax) { contact['contact_fax'] = results[i].fax; }
+                                if (results[i].email) { contact['contact_email'] = results[i].email; }
+
+KandyAPI.Phone.addToPersonalAddressBook(
+                                        contact,
+                                        loadContacts, // function to call on success
+                                        function (message) { alert("Error: " + message); }
+                                );
+                                break;
+                            }
+                        }
+                    },
+                    function (statusCode) {
+                        alert("Error getting contact details: " + statusCode )
+                    }
+            );
+        }
+    }
+
+    sendIm = function() {
+        var uuid = KandyAPI.Phone.sendIm($('#imToUser').val(), $('#imMessageToSend').val(),
+                function(result) {
+                    $('#messages').append('<div>' +
+                            '<span class="imUsername">' + $('#logInId').val() + '</span>' +
+                            '<span class="imMessage">' + $('#imMessageToSend').val() + '</span>' +
+                            '</div>');
+                    $('#imMessageToSend').val('');
+                    //alert('sent, msgID=' + uuid);
+                },
+                function() {
+                    alert("IM send failed");
+                }
+        );
+    };
 
     getIms = function() {
         KandyAPI.Phone.getIm(
@@ -98,8 +159,8 @@
                 function() {
                     alert("error receiving IMs");
                 }
-			)
-		};
+        )
+    };
 
     changeUIState = function(state) {
         switch (state) {
@@ -107,55 +168,56 @@
                 $('#loggedInAs').val('');
                 $("#loginForm").show();
                 $("#loggedIn").hide();
+                $('#contactsAndDirSearch').hide();
                 $('#messages').empty();
+                $("#myContacts div:not(:first)").remove();
                 $("#chat").hide();
                 break;
             case 'LOGGED_IN':
                 $('#loggedInAs').text($('#logInId').val());
                 $("#loginForm").hide();
                 $("#loggedIn").show();
+                $('#contactsAndDirSearch').show();
                 $("#chat").show();
                 break;
         }
     }
 </script>
 
-		<style>
-			#domainApiId{width:200px;margin-bottom:1px}
-			#logInId{width:200px;margin:0 0 1px 64px;}
-			#passwd{width:200px;margin-left: 41px;}
-			#loginBtn{width:90px;height:23px;margin:5px 0 5px 110px;}
-			.imUsername{display:inline-block; width:100px}
-			#imMessageToSend{width:175px}
-			#messages{border: solid black 1px}
-			.imMessage{display:inline-block; width:275px}
-			#logoutBtn{width:90px;height:23px;}
-		</style>
-	</head>
+<style>
+    #domainApiId{width:200px;margin-bottom:1px}
+    #logInId{width:200px;margin:0 0 1px 64px;}
+    #passwd{width:200px;margin-left: 41px;}
+    #loginBtn{width:90px;height:23px;margin:5px 0 5px 110px;}
+    .imUsername{display:inline-block; width:100px}
+    #imMessageToSend{width:175px}
+    #messages{border: solid black 1px}
+    .imMessage{display:inline-block; width:275px}
+    #logoutBtn{width:90px;height:23px;}
+</style>
+</head>
 
-	<body id=main onload="setup()" style="width:500px;">
-		<h2>Heliograph</h2>
+<body onload="setup()" style="width:500px;">
+<h2>Quick Start Sample App: Chat</h2>
 
-		<div id="loggedIn" style="display:none">
-		   Hello <span id="loggedInAs"></span>. &nbsp;&nbsp;&nbsp;&nbsp;
-			<input id="logoutBtn" type="button" value="Log Out" onclick="logout()" />
-		</div>
-		
-		<form id="loginForm">
-			Username: <input id="logInId" type="text"/><br/>
-			Password: <input id="passwd" type="password"/><br/>
-			<input id="loginBtn" type="button" value="Log in" onclick="login();return false;"/>
-		</form>
-		
-		<br/>
-		<br/>
-		
-		<div id="chat" style="display:none">
-			<form id="imForm" onsubmit="return false;">
-				Message: <input id= "imMessageToSend" type="text"/>
-				<input type="submit" onclick="sendIm();return false;" value="Send"/>  <br/>
-			</form>
-			<div id="messages" style="width:500px"></div>
-		</div>
-	</body>
+<div id="loggedIn" style="display:none">
+   Hello <span id="loggedInAs"></span>. &nbsp;&nbsp;&nbsp;&nbsp;
+    <input id="logoutBtn" type="button" value="Log Out" onclick="logout()" />
+</div>
+<form id="loginForm">
+    Username: <input id="logInId" type="text"/><br/>
+    Password: <input id="passwd" type="password"/><br/>
+    <input id="loginBtn" type="button" value="Log in" onclick="login();return false;"/>
+</form>
+<br/>
+<br/>
+<div id="chat" style="display:none">
+    <form id="imForm" onsubmit="return false;">
+        Contact: <select id="imToUser"/></select>&nbsp;
+        Message: <input id= "imMessageToSend" type="text"/>
+        <input type="submit" onclick="sendIm();return false;" value="Send"/>  <br/>
+    </form>
+    <div id="messages" style="width:500px"></div>
+</div>
+</body>
 </html>
