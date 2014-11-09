@@ -44,21 +44,21 @@
         });
     };
 	
-	flareObj = function(user, hero, description, category, $(window.latitude).val() ,$(window.latitude).val() ) {
+	flareObj = function(user, hero, description, category, longitude, latitude ) {
 		this.id = new Date().getTime();
 		this.user = user;
 		this.hero = hero;
 		this.description = description;
 		this.category = category;
-		this.latitude = window.latitude;
-		this.longitude = window.longitude;
+		this.latitude = latitude;
+		this.longitude = longitude;
 }
     	
 	function flareSubmit() {
 						
 			function showLocation(position) {
-  				window.latitude = position.coords.latitude;
-  				window.longitude = position.coords.longitude;
+  				var window.latitude = position.coords.latitude;
+  				var window.longitude = position.coords.longitude;
 			}
 
 			function errorHandler(err) {
@@ -80,7 +80,7 @@
 			}
 		
 
-		var flare = new flareObj($('#logInId').val(), null, document.getElementById('desc').value, document.getElementById('cat').value);
+		var flare = new flareObj($('#logInId').val(), null, document.getElementById('desc').value, document.getElementById('cat').value, window.longitude, window.latitude);
 		var flareStr = JSON.stringify(flare);
 		
 		sendIm(flareStr);
