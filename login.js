@@ -1,6 +1,6 @@
 
 Flare = function(commoner, description) {
-    this.id = 0;
+      this.id = new Date().getTime();
    // this.commoner = commoner;
    // this.description = description;
 }
@@ -14,7 +14,7 @@ function flareSubmit() {
 
     sendIm('user1@domain.com', flareStr);
     sendIm('user2@domain.com', flareStr);
-sendIm('user3@domain.com', flareStr);
+	sendIm('user3@domain.com', flareStr);
 sendIm('user4@domain.com', flareStr);
 sendIm('user5@domain.com', flareStr);
 }
