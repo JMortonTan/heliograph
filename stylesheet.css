@@ -5,16 +5,31 @@
     background-color: #336699;
     font-family: Arial;
     color: #FFFFFF;
-    text-align: center;
+	text-align: center;
+}
+
+a{
+    text-decoration: none;
+}
+
+/*Link hover style*/
+a:hover{
+    color: #FFA500;
 }
 
 #main{
-    margin: 0 auto;
+	margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
+    margin-right: -50%;
     transform: translate(-50%, -50%);
 }
+
+#arrow{
+	color: #FFA500;
+}
+
 
 /* Maps */
 #map {
