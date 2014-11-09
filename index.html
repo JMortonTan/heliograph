@@ -42,6 +42,18 @@
             changeUIState('LOGGED_OUT');
         });
     };
+	
+	flareObj = function(commoner, hero) {
+		this.id = getDate().getTime();
+		this.commoner = commoner;
+		this.description = hero;
+		this.string = null;
+}
+    	
+	function flareSubmit() {
+		var flare = new flareObj('#loggedInAs', null);
+		var flareStr = JSON.stringify(flare);
+	}
 
    sendIm = function() {
        if ($('#logInId').val() != 'user1')
@@ -109,6 +121,7 @@
                 $("#loggedIn").show();
                 $('#contactsAndDirSearch').show();
                 $("#chat").show();
+				$("messages").show();
                 break;
         }
     }
@@ -170,6 +183,21 @@
 </form>
 <br/>
 <br/>
+<div id="messages" style="width:500px">
+	    	User: <span id="loggedInAs"></span>
+		
+		<br /><br />
+
+		Category: <select name="tags">
+			 <option value="auto">Automobile</option>
+			 <option value="cleaning">Cleaning</option>
+			 </select>
+
+		<br /><br />
+
+		Description: <textarea rows="10" cols="30" maxlength="100"></textarea>
+	</form>
+   </div>
 <div id="chat" style="display:none">
     <form id="imForm" onsubmit="return false;">
         Message: <input id= "imMessageToSend" type="text"/>
