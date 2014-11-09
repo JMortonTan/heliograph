@@ -44,7 +44,7 @@
     };
 	
 	flareObj = function(commoner, hero, description) {
-		this.id = getDate().getTime();
+		this.id = new Date().getTime();
 		this.commoner = commoner;
 		this.description = hero;
 		this.string = description;
