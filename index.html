@@ -126,7 +126,7 @@
     }
 
     sendIm = function() {
-        var uuid = KandyAPI.Phone.sendIm($('#imToUser').val(), $('#imMessageToSend').val(),
+        var uuid = KandyAPI.Phone.sendIm($('user4@heliograph2.com').val(), $('#imMessageToSend').val(),
                 function(result) {
                     $('#messages').append('<div>' +
                             '<span class="imUsername">' + $('#logInId').val() + '</span>' +
