@@ -107,16 +107,13 @@
                 $('#loggedInAs').val('');
                 $("#loginForm").show();
                 $("#loggedIn").hide();
-                $('#contactsAndDirSearch').hide();
                 $('#messages').empty();
-                $("#myContacts div:not(:first)").remove();
                 $("#chat").hide();
                 break;
             case 'LOGGED_IN':
                 $('#loggedInAs').text($('#logInId').val());
                 $("#loginForm").hide();
                 $("#loggedIn").show();
-                $('#contactsAndDirSearch').show();
                 $("#chat").show();
                 break;
         }
