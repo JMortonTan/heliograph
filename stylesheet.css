@@ -19,7 +19,7 @@ time, mark, audio, video {
 *		GENERAL
 *====================================*/
 html, body {
-	/*background-color: #336699;*/
+	background-color: #336699;
 	width: 100%;
 	height: 100%;
 }
