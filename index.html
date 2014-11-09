@@ -94,7 +94,7 @@
                             var username = data.messages[i].sender.user_id;
                             window.msg = data.messages[i].message.text
 							
-							var flare =  JSON.parse(msg);
+							var flare =  JSON.parse(window.msg);
 
                             $('#messages').append('<div>' +
                                     '<span class="imUsername">' + username + '</span>' +
