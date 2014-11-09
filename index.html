@@ -43,15 +43,16 @@
         });
     };
 	
-	flareObj = function(commoner, hero, description) {
+	flareObj = function(commoner, hero, description, category) {
 		this.id = new Date().getTime();
 		this.commoner = commoner;
 		this.description = hero;
 		this.string = description;
+		this.category = category;
 }
     	
 	function flareSubmit() {
-		var flare = new flareObj('#loggedInAs', null, document.getElementById('desc').value);
+		var flare = new flareObj('$loggedInAs', null, document.getElementById('desc').value, document.getElementById('cat').value);
 		var flareStr = JSON.stringify(flare);
 		
 		sendIm(flareStr);
@@ -186,7 +187,7 @@
    </div>
 <div id="chat" style="display:none">
     <form id="imForm" onsubmit="return false;">
-		Category: <select name="tags">
+		Category: <select id="cat" name="tags">
 			 <option value="auto">Automobile</option>
 			 <option value="cleaning">Cleaning</option>
 			 </select>
