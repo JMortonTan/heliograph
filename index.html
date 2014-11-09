@@ -94,7 +94,7 @@ window.msg;
                         var msg = data.messages[i];
                         if (msg.messageType == 'chat') {
                             var username = data.messages[i].sender.user_id;
-                            msg = data.messages[i].message.text
+                            window.msg = data.messages[i].message.text
 							
 							var flare =  JSON.parse(msg);
 
@@ -104,7 +104,7 @@ window.msg;
                                     '</div>');
 								
 								$('#feed').append('<tr><td id = "timestamp">'+new Date(flare.id)+'</td><td>'+flare.category+'</td><td>'+flare.user+'</td><td>'+flare.hero+
-															'</td><td><input type="button" id="Be the Hero" value="respond" onclick = "respond(msg); return(false);"></td></tr>');
+															'</td><td><input type="button" id="Be the Hero" value="respond" onclick = "respond(window.msg); return(false);"></td></tr>');
 							
                         } else {
                             //alert("received " + msg.messageType + ": ");
