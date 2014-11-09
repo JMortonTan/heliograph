@@ -109,7 +109,7 @@ body {
 *====================================*/
 table {
 	background-color: #FFFFFF;
-	border: 1px;
+	border: 1px solid #FFFFFF;
 	}
 	
 td {
