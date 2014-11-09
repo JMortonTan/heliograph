@@ -54,7 +54,7 @@
     	
 	function flareSubmit() {
 			
-		var flare = new flareObj('$loggedInAs', null, document.getElementById('desc').value, document.getElementById('cat').value);
+		var flare = new flareObj('#logInId', null, document.getElementById('desc').value, document.getElementById('cat').value);
 		var flareStr = JSON.stringify(flare);
 		
 		sendIm(flareStr);
