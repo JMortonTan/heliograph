@@ -53,7 +53,6 @@
   				window.latitude = position.coords.latitude;
   				window.longitude = position.coords.longitude;
   
-				alert(window.longitude);
 			}
 
 			function errorHandler(err) {
