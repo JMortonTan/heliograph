@@ -1,0 +1,102 @@
+/*====================================
+*	CSS RESET
+*====================================*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, 
+label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details,
+embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+/*====================================
+*		GENERAL
+*====================================*/
+#tops {
+	background-color: #336699;
+	height: 100px;
+}
+
+#tops h2 {
+	font-size: 30px;
+	font-family : Arial;
+	color: #FFFFFF;
+	text-align: center;
+	padding-top: 30px;
+	padding-left: 20px;
+	display: block;
+}
+
+#container {
+	width: 100%;
+}
+
+#main-form {
+	margin: 0 auto;
+	border: 1px solid #65C9EB;
+	height: 400px;
+	width: 500px;
+	margin-top: 100px;
+	text-align: center;
+	padding: 30px;
+	padding-top: 50px;
+	background-color: #DFEBE9;
+	box-shadow: 10px 10px 5px #888888;
+}
+	
+/*====================================
+*		FORMS
+*====================================*/
+#domainApiId{
+	width:200px; 
+	height: 30px;
+	margin:0 0 20px 64px;
+	border: 1px solid #65C9EB;
+	font-size: 18px;
+	color: #66707D;
+}
+
+#logInId { 
+	width:200px; 
+	height: 30px;
+	margin:0 0 1px 64px;
+	border: 1px solid #65C9EB;
+	font-size: 18px;
+	color: #66707D;
+}
+
+#passwd { 
+	width:200px;
+	height: 30px;
+	margin:20px 0 20px 64px;
+	border: 1px solid #65C9EB;
+	font-size: 18px;
+}
+
+#loginBtn {
+	width:90px;
+	height:30px;
+	margin-top: 30px;
+}
+
+.imUsername		{ display:inline-block; width:100px; }
+#imMessageToSend	{ width:175px }
+#messages		{ border: solid black 0px }
+.imMessage		{ display:inline-block; width:275px; }
+#logoutBtn		{ width:90px;height:30px; }
+
+/* Logged out */
+#login-title {
+	font-size: 24px;
+}
+	
+#login-text {
+	font-size: 18px;
+	color: #000000;
+}

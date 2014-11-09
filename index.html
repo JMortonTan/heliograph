@@ -1,224 +1,72 @@
 <html>
-<head>
-<!-- All three files required for Kandy  -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script src="https://kandy-portal.s3.amazonaws.com/public/javascript/fcs/1.0.0/fcs.js" ></script>
-<script src="https://kandy-portal.s3.amazonaws.com/public/javascript/kandy/1.1.2/kandy.js" ></script>
+	<head>
+		<title>Heliograph</title>
+		<link rel="stylesheet" type="text/css" href="stylesheet.css">
 
-<script language = "JavaScript">
+		<!-- All three files required for Kandy  -->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script src="https://kandy-portal.s3.amazonaws.com/public/javascript/fcs/1.0.0/fcs.js" ></script>
+		<script src="https://kandy-portal.s3.amazonaws.com/public/javascript/kandy/1.1.2/kandy.js" ></script>
+		<script src="main.js"></script>
+	</head>
 
-	$.urlParam = function(name){
-	    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-	    if (results==null){
-	       return null;
-	    }
-	    else{
-	       return results[1] || 0;
-	    }
-	}
+	<body onload="setup()">
+		<div id="tops">
+			<h2>Heliograph</h2>
+		</div>
 
-    // this is called when page is done loading to set up (initialize) the KandyAPI.Phone
-    setup = function() {
-        // initialize KandyAPI.Phone, passing a config JSON object that contains listeners (event callbacks)
-        KandyAPI.Phone.setup({
-            // respond to Kandy events...
-            listeners: {
-                loginsuccess: function () {
-                    changeUIState('LOGGED_IN');
-                    setInterval(getIms, 5000);
-                }
-                loginfailed: function () { alert("Login failed");}
-            }
-        });
-    }
+		<div id="container">
+			<div id="main-form">
+				
+				<!-- LOGGED OUT -->				
+				<form id="loginForm" style="display:none">
+					<span id="login-title">Welcome Guest! Please login.</span>
+		
+					<br /> <br /><br /><br />
+
+					<span id="login-text">
+					API Key:&nbsp&nbsp;    <input id="domainApiId" type="text" value="DAK63ed5440255241d88666c634650bda4e" /><br/>
+					Username: <input id="logInId" type="text" value=""/><br/>
+					Password:  <input id="passwd" type="password" value=""/><br/>
+					</span>
+					<input id="loginBtn" type="button" value="Log in" onclick="login();return false;"/>
+					<input id="loginBtn" type="reset"   value="Clear" />
+				</form>
+
+				<!-- LOGGED IN -->
+				<div id="loggedIn" style="display:none">
+		   			<span id="login-text">Welcome <span id="loggedInAs"></span>!.</span>
+
+					<br /><br /><br />					
+
+					<input id="logoutBtn" type="button" value="Log Out" onclick="logout()" />
+				</div>
+
+				<!-- MESSAGE FORM -->
+				<div id="chat">
+					<form id="imForm" onsubmit="return false;">
+						Category: <select id="cat" name="tags">
+			 				 <option value="automotive">Automotive</option>
+			 				 <option value="cleaning">Cleaning</option>
+			 				 </select>
+
+						<br/><br/>
 	
-
-    login = function() {
-        KandyAPI.Phone.login($("#domainApiId").val(), $("#logInId").val(), $('#passwd').val());
-    }
-
-    logout = function() {
-        KandyAPI.Phone.logout(function () {
-            changeUIState('LOGGED_OUT');
-        });
-    };
-	
-	flareObj = function(user, hero, description, category) {
-		this.id = new Date().getTime();
-		this.user = user;
-		this.hero = hero;
-		this.description = description;
-		this.category = category;
-}
-    	
-	function flareSubmit() {
+						Description: <textarea id="desc" rows="5" cols="30" maxlength="100"></textarea>
 		
-		var flare = new flareObj($('#logInId').val(), null, document.getElementById('desc').value, document.getElementById('cat').value,);
-		var flareStr = JSON.stringify(flare);
-		
-		sendIm(flareStr);
+						<br/><br/>
+        						
+						Message: <input id= "imMessageToSend" type="text"/>
+        						<input type="submit" onclick="flareSubmit();return false;" value="Send"/>  <br/>
+   					</form>
+				</div>
 
-   sendIm = function(flare) {
-       if ($('#logInId').val() != 'user1')
-           sendImToUser('user1@heliograph2.com', flare);
-       if ($('#logInId').val() != 'user2')
-           sendImToUser('user2@heliograph2.com', flare);
-       if ($('#logInId').val() != 'user3')
-           sendImToUser('user3@heliograph2.com', flare);
-       if ($('#logInId').val() != 'user4')
-           sendImToUser('user4@heliograph2.com', flare);
-       if ($('#logInId').val() != 'user5.com')
-           sendImToUser('user5@heliograph2.com', flare);
-   };
+				<!-- MESSAGES -->
+				<div id="messages" style="width:500px"></div>
 
-    sendImToUser = function(userName, flare) {
-        var uuid = KandyAPI.Phone.sendIm(userName, flare,
-                function(result) {
-                    //alert('IM sent to '+ userName);
-                },
-                function() {
-                    alert("IM send failed");
-                }
-        );
-    };
-	
-    getIms = function() {
-        KandyAPI.Phone.getIm(
-                function(data) {
-                    var i = 0;
-                    for (i = 0; i < data.messages.length; ++i) {
-                        var msg = data.messages[i];
-                        if (msg.messageType == 'chat') {
-                            var username = data.messages[i].sender.user_id;
-                            window.msg = data.messages[i].message.text
-							
-							var flare =  JSON.parse(window.msg);
-
-                            $('#messages').append('<div>' +
-                                    '<span class="imUsername">' + username + '</span>' +
-                                    '<span class="imMessage">' + msg + '</span>' +
-                                    '</div>');
-								
-								$('#feed').append('<tr><td id = "timestamp">'+new Date(flare.id)+'</td><td>'+flare.category+'</td><td>'+flare.user+'</td><td>'+flare.hero+
-															'</td><td><input type="button" id="Be the Hero" value="respond" onclick = "respond(window.msg); return(false);"></td></tr>');
-							
-                        } else {
-                            //alert("received " + msg.messageType + ": ");
-                        }
-                    }
-                },
-                function() {
-                    alert("error receiving IMs");
-                }
-        )
-    };
-	
-	respond = function(msg){
-		var flare =  JSON.parse(msg);
-		
-		flare.hero = $("#logInId").val();
-		var flareStr = JSON.stringify(flare);
-		
-		sendIm(flareStr);		
-		}
-		
-
-    changeUIState = function(state) {
-        switch (state) {
-            case 'LOGGED_OUT':
-                $('#loggedInAs').val('');
-                $("#loginForm").show();
-                $("#loggedIn").hide();
-                $('#contactsAndDirSearch').hide();
-                $("#myContacts div:not(:first)").remove();
-                $("#chat").hide();
-                break;
-            case 'LOGGED_IN':
-                $('#loggedInAs').text($('#logInId').val());
-                $("#loginForm").hide();
-                $("#loggedIn").show();
-                $('#contactsAndDirSearch').show();
-                $("#chat").show();
-                break;
-        }
-    }
-    
-    $(document).ready(function() {
-        if ($.urlParam('userid')) {
-            var password = null;
-            switch ($.urlParam('userid')) {
-                case 'user1':
-                    password = '1um6v66w1';
-                    break;
-                case 'user2':
-                    password = '2iwolimw12';
-                    break;
-                case 'user3':
-                    password = 'aaaa1234';
-                    break;
-                case 'user4':
-                    password = 'aaaa1234';
-                    break;
-                case 'user5':
-                    password = 'aaaa1234';
-                    break;
-            }  //switch
-            $('#logInId').val($.urlParam('userid'));
-            $('#passwd').val(password);
-            if ($.urlParam('userid') !== undefined && $.urlParam('userid') != null)
-                login();
-        }
-    });
-
-</script>
-
-<style>
-    #domainApiId{width:200px;margin-bottom:1px}
-    #logInId{width:200px;margin:0 0 1px 64px;}
-    #passwd{width:200px;margin-left: 41px;}
-    #loginBtn{width:90px;height:23px;margin:5px 0 5px 110px;}
-    .imUsername{display:inline-block; width:100px}
-    #imMessageToSend{width:175px}
-    #messages{border: solid black 1px}
-    .imMessage{display:inline-block; width:275px}
-    #logoutBtn{width:90px;height:23px;}
-</style>
-</head>
-
-<body onload="setup()" style="width: 500px">
-<h2>Welcome to Heliograph</h2>
-
-<div id="loggedIn" style="display:none">
-   Hello <span id="loggedInAs"></span>. &nbsp;&nbsp;&nbsp;&nbsp;
-    <input id="logoutBtn" type="button" value="Log Out" onclick="logout()" />
-</div>
-<form id="loginForm">
-    Project API Key: <input id="domainApiId" type="text"  value="DAK63ed5440255241d88666c634650bda4e"/><br/>
-    Username: <input id="logInId" type="text" value=""/><br/>
-    Password: <input id="passwd" type="password" value=""/><br/>
-    <input id="loginBtn" type="button" value="Log in" onclick="login();return false;"/>
-</form>
-<br/>
-<br/>
-   </div>
-<div id="chat" style="display:none">
-    <form id="imForm" onsubmit="return false;">
-		Category: <select id="cat" name="tags">
-			 <option value="automotive">Automotive</option>
-			 <option value="cleaning">Cleaning</option>
-			 </select>
-
-		<br/><br/>
-
-		Description: <textarea id="desc" rows="5" cols="30" maxlength="100"></textarea>
-		
-		<br/><br/>
-        Message: <input id= "imMessageToSend" type="text"/>
-        <input type="submit" onclick="flareSubmit();return false;" value="Send"/>  <br/>
-    </form>
-    <div id="messages" style="width:100%"></div>
-</div>
-
-	<table id="feed" style = "width: 100%"></table>
-</body>
+				<!-- TABLE -->
+				<table id="feed" style = "width: 100%"></table>
+			</div>
+		</div>
+	</body>
 </html>
