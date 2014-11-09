@@ -101,7 +101,7 @@
                                     '<span class="imMessage">' + msg + '</span>' +
                                     '</div>');
 								
-								$('#feed').append('<tr><td id = "timestamp">'+new Date(flare.id)+'</td><td>'+flare.user+'</td><td><input type="button" id="Be the Hero" value="respond" onclick = "return(false)"></td></tr>');
+								$('#feed').append('<tr><td id = "timestamp">'+new Date(flare.id)+'</td><td>'+flare.category+'</td><td>'+flare.user+'</td><td>'+flare.hero+'</td><td><input type="button" id="Be the Hero" value="respond" onclick = "respond(flare); return(false);"></td></tr>');
 							
                         } else {
                             //alert("received " + msg.messageType + ": ");
@@ -113,6 +113,16 @@
                 }
         )
     };
+	
+	respond = function(flare){
+		flare.hero = $("#logInId").val();
+		var flareStr = JSON.stringify(flare);
+		
+		sendIm(flareStr);
+		
+		
+		}
+		
 
     changeUIState = function(state) {
         switch (state) {
