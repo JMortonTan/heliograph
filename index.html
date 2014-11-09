@@ -5,7 +5,6 @@
 <script src="https://kandy-portal.s3.amazonaws.com/public/javascript/fcs/1.0.0/fcs.js" ></script>
 <script src="https://kandy-portal.s3.amazonaws.com/public/javascript/kandy/1.1.2/kandy.js" ></script>
 
-
 <script language = "JavaScript">
 
 	$.urlParam = function(name){
@@ -34,23 +33,6 @@
         });
     }
 	
-	function errorHandler(err) {
-  				if(err.code == 1) {
-    					alert("Error: Access is denied!");
-  				} else if( err.code == 2) {
-    					alert("Error: Position is unavailable!");
-  				}
-			}
-
-			function getLocation() {
-				if(navigator.geolocation) {
-      					// timeout at 60000 milliseconds (30 seconds)
-      					var options = {timeout:30000};
-      					navigator.geolocation.getCurrentPosition(flareSubmit, errorHandler, options);
-   				} else {
-      					alert("Sorry, browser does not support geolocation!");
-   				}
-			}
 
     login = function() {
         KandyAPI.Phone.login($("#domainApiId").val(), $("#logInId").val(), $('#passwd').val());
@@ -62,24 +44,17 @@
         });
     };
 	
-	flareObj = function(commoner, hero, description, category, latitude, longitude) {
+	flareObj = function(commoner, hero, description, category) {
 		this.id = new Date().getTime();
 		this.commoner = commoner;
 		this.description = hero;
 		this.string = description;
 		this.category = category;
-		this.longitude = longitude;
-		this.latitude = latitude;
 }
     	
-	function flareSubmit(position) {
+	function flareSubmit() {
 			
-			
-			
-  				var latitude = position.coords.latitude;
-  				var longitude = position.coords.longitude;
-			
-		var flare = new flareObj('$loggedInAs', null, document.getElementById('desc').value, document.getElementById('cat').value, latitude, longitude);
+		var flare = new flareObj('$loggedInAs', null, document.getElementById('desc').value, document.getElementById('cat').value);
 		var flareStr = JSON.stringify(flare);
 		
 		sendIm(flareStr);
