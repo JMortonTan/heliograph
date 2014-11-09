@@ -1,6 +1,6 @@
 
 Flare = function(commoner, description) {
-      this.id = new Date().getTime();
+    this.id = 0;
    // this.commoner = commoner;
    // this.description = description;
 }
@@ -14,7 +14,7 @@ function flareSubmit() {
 
     sendIm('user1@domain.com', flareStr);
     sendIm('user2@domain.com', flareStr);
-	sendIm('user3@domain.com', flareStr);
+sendIm('user3@domain.com', flareStr);
 sendIm('user4@domain.com', flareStr);
 sendIm('user5@domain.com', flareStr);
 }
@@ -119,7 +119,18 @@ KandyAPI.Phone.addToPersonalAddressBook(
         var uuid = KandyAPI.Phone.sendIm('user1@heliograph2.com', $('#imMessageToSend').val(),
                 function(result) {
 	     flareSubmit();
-    };
+                    //$('#messages').append('<div>' +
+                      //      '<span class="imUsername">' + $('#logInId').val() + '</span>' +
+                        //    '<span class="imMessage">' + $('#imMessageToSend').val() + '</span>' +
+                          //  '</div>');
+                    //$('#imMessageToSend').val('');
+                    //alert('sent, msgID=' + uuid);
+                },
+                function() {
+                    alert("IM send failed");
+                }
+        );
+		}
 
     getIms = function() {
         KandyAPI.Phone.getIm(
