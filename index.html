@@ -44,14 +44,14 @@
         });
     };
 	
-	flareObj = function(user, hero, description, category, latitude, longitude) {
+	flareObj = function(user, hero, description, category) {
 		this.id = new Date().getTime();
 		this.user = user;
 		this.hero = hero;
 		this.description = description;
 		this.category = category;
-		this.latitude = latitude;
-		this.longitude = longitude;
+		this.latitude = window.latitude;
+		this.longitude = window.longitude;
 }
     	
 	function flareSubmit() {
@@ -84,7 +84,7 @@
 			}
 		
 
-		var flare = new flareObj($('#logInId').val(), null, document.getElementById('desc').value, document.getElementById('cat').value, window.latitude, window.longitude);
+		var flare = new flareObj($('#logInId').val(), null, document.getElementById('desc').value, document.getElementById('cat').value);
 		var flareStr = JSON.stringify(flare);
 		
 		sendIm(flareStr);
