@@ -81,7 +81,10 @@
         google.maps.event.addDomListener(window, 'load', initialize);
 	</script>
 	<script src="https://plus.google.com/js/client:platform.js" type="text/javascript"></script>
-	<script type="text/javascript"> gapi.auth.signOut();</script>  
+	<script type="text/javascript">
+		gapi.auth.signOut();
+		window.location.href = 'index.html';
+	</script>  
 	</head>
 
 	<body>
