@@ -51,25 +51,27 @@
 }
     	
 	function flareSubmit() {
-		var flare = new flareObj('#loggedInAs', null, description);
+		var flare = new flareObj('#loggedInAs', null, document.getElementById('desc').value);
 		var flareStr = JSON.stringify(flare);
+		
+		sendIm(flareStr);
 	}
 
-   sendIm = function() {
+   sendIm = function(flare) {
        if ($('#logInId').val() != 'user1')
-           sendImToUser('user1@heliograph2.com');
+           sendImToUser('user1@heliograph2.com', flare);
        if ($('#logInId').val() != 'user2')
-           sendImToUser('user2@heliograph2.com');
+           sendImToUser('user2@heliograph2.com', flare);
        if ($('#logInId').val() != 'user3')
-           sendImToUser('user3@heliograph2.com');
+           sendImToUser('user3@heliograph2.com', flare);
        if ($('#logInId').val() != 'user4')
-           sendImToUser('user4@heliograph2.com');
+           sendImToUser('user4@heliograph2.com', flare);
        if ($('#logInId').val() != 'user5.com')
-           sendImToUser('user5@heliograph2.com');
+           sendImToUser('user5@heliograph2.com', flare);
    };
 
-    sendImToUser = function(userName) {
-        var uuid = KandyAPI.Phone.sendIm(userName, $('#imMessageToSend').val(),
+    sendImToUser = function(userName, flare) {
+        var uuid = KandyAPI.Phone.sendIm(userName, flare,
                 function(result) {
                     //alert('IM sent to '+ userName);
                 },
@@ -111,7 +113,6 @@
                 $("#loginForm").show();
                 $("#loggedIn").hide();
                 $('#contactsAndDirSearch').hide();
-                $('#messages').empty();
                 $("#myContacts div:not(:first)").remove();
                 $("#chat").hide();
                 break;
@@ -192,11 +193,11 @@
 
 		<br/><br/>
 
-		Description: <textarea rows="10" cols="30" maxlength="100"></textarea>
+		Description: <textarea id="desc" rows="5" cols="30" maxlength="100"></textarea>
 		
 		<br/><br/>
         Message: <input id= "imMessageToSend" type="text"/>
-        <input type="submit" onclick="sendIm();return false;" value="Send"/>  <br/>
+        <input type="submit" onclick="flareSubmit();return false;" value="Send"/>  <br/>
     </form>
     <div id="messages" style="width:500px"></div>
 </div>
