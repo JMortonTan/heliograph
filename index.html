@@ -114,7 +114,7 @@
                 $('#messages').empty();
                 $("#myContacts div:not(:first)").remove();
                 $("#chat").hide();
-				$("messages").hide();
+				$("#form").hide();
                 break;
             case 'LOGGED_IN':
                 $('#loggedInAs').text($('#logInId').val());
@@ -122,7 +122,7 @@
                 $("#loggedIn").show();
                 $('#contactsAndDirSearch').show();
                 $("#chat").show();
-				$("messages").show();
+				$("#form").show();
                 break;
         }
     }
@@ -184,7 +184,7 @@
 </form>
 <br/>
 <br/>
-<div id="messages" style="width:500px" style="display:none">		
+<div id="form" style="width:500px" style="display:none">		
 		<br /><br />
 
 		Category: <select name="tags">
