@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<!--Page Title-->
+		<!-- Page Title -->
         <title>Heliograph</title>
 		
 		<!-- All three files required for Kandy  -->
@@ -8,6 +8,7 @@
 		<script src="https://kandy-portal.s3.amazonaws.com/public/javascript/fcs/1.0.0/fcs.js" ></script>
 		<script src="https://kandy-portal.s3.amazonaws.com/public/javascript/kandy/1.1.2/kandy.js" ></script>
 
+		<!-- Flare Object -->
 		<script language = "JavaScript">
 			Flare = function(commoner, description) {
 			this.id = 0;
@@ -51,7 +52,7 @@
     }
 
     login = function() {
-        KandyAPI.Phone.login($(DAKfca0bf8f227342b5adc0b766a95c1e30).val(), $("#logInId").val(), $('#passwd').val());
+        KandyAPI.Phone.login($("DAKfca0bf8f227342b5adc0b766a95c1e30").val(), $("#logInId").val(), $('#passwd').val());
     }
 
     logout = function() {
