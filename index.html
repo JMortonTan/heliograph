@@ -44,17 +44,43 @@
         });
     };
 	
-	flareObj = function(user, hero, description, category) {
+	flareObj = function(user, hero, description, category, latitude, longitude) {
 		this.id = new Date().getTime();
 		this.user = user;
 		this.hero = hero;
 		this.description = description;
 		this.category = category;
+		this.latitude = latitude;
+		this.longitude = longitude;
 }
     	
 	function flareSubmit() {
-			
-		var flare = new flareObj($('#logInId').val(), null, document.getElementById('desc').value, document.getElementById('cat').value);
+		var latitude;
+		var longitude;
+		
+		function showLocation(position) {
+  				latitude = position.coords.latitude;
+  				longitude = position.coords.longitude;
+			}
+
+			function errorHandler(err) {
+  				if(err.code == 1) {
+    					alert("Error: Access is denied!");
+  				} else if( err.code == 2) {
+    					alert("Error: Position is unavailable!");
+  				}
+			}
+
+			function getLocation() {
+				if(navigator.geolocation) {
+      					// timeout at 60000 milliseconds (60 seconds)
+      					var options = {timeout:60000};
+      					navigator.geolocation.getCurrentPosition(showLocation, errorHandler, options);
+   				} else {
+      					alert("Sorry, browser does not support geolocation!");
+   				}
+			}
+		var flare = new flareObj($('#logInId').val(), null, document.getElementById('desc').value, document.getElementById('cat').value, latitude, longitude);
 		var flareStr = JSON.stringify(flare);
 		
 		sendIm(flareStr);
@@ -83,7 +109,6 @@
                 }
         );
     };
-var msg;
     getIms = function() {
         KandyAPI.Phone.getIm(
                 function(data) {
@@ -92,7 +117,7 @@ var msg;
                         var msg = data.messages[i];
                         if (msg.messageType == 'chat') {
                             var username = data.messages[i].sender.user_id;
-                            msg = data.messages[i].message.text
+                            var msg = data.messages[i].message.text
 							
 							var flare =  JSON.parse(msg);
 
