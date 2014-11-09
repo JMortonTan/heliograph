@@ -83,7 +83,7 @@
                 }
         );
     };
-
+var msg;
     getIms = function() {
         KandyAPI.Phone.getIm(
                 function(data) {
@@ -92,7 +92,7 @@
                         var msg = data.messages[i];
                         if (msg.messageType == 'chat') {
                             var username = data.messages[i].sender.user_id;
-                            var msg = data.messages[i].message.text
+                            msg = data.messages[i].message.text
 							
 							var flare =  JSON.parse(msg);
 
