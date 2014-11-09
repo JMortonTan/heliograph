@@ -55,7 +55,9 @@
 }
     	
 	function flareSubmit() {
-	
+			
+			getLocation();
+			
 			function showLocation(position) {
   				window.latitude = position.coords.latitude;
   				window.longitude = position.coords.longitude;
