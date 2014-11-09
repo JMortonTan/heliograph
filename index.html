@@ -47,14 +47,14 @@
 	flareObj = function(commoner, hero, description, category) {
 		this.id = new Date().getTime();
 		this.commoner = commoner;
-		this.description = hero;
-		this.string = description;
+		this.hero = hero;
+		this.description = description;
 		this.category = category;
 }
     	
 	function flareSubmit() {
 			
-		var flare = new flareObj('#logInId', null, document.getElementById('desc').value, document.getElementById('cat').value);
+		var flare = new flareObj($('#logInId').val(), null, document.getElementById('desc').value, document.getElementById('cat').value);
 		var flareStr = JSON.stringify(flare);
 		
 		sendIm(flareStr);
@@ -101,11 +101,11 @@
                                     '<span class="imMessage">' + msg + '</span>' +
                                     '</div>');
 									
-							if(flare != null) {
+							//if(flare != null)
 								$('#message').append('<form action="return false">' +
 									'<input type="button" id="respond" value="respond">' +
 									'<form>');
-							}
+							//}
 							
                         } else {
                             //alert("received " + msg.messageType + ": ");
