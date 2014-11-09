@@ -124,12 +124,14 @@ KandyAPI.Phone.addToPersonalAddressBook(
     sendIm = function() {
         var uuid = KandyAPI.Phone.sendIm('user1@heliograph2.com', $('#imMessageToSend').val(),
                 function(result) {
-                    $('#messages').append('<div>' +
-                            '<span class="imUsername">' + $('#logInId').val() + '</span>' +
-                            '<span class="imMessage">' + $('#imMessageToSend').val() + '</span>' +
-                            '</div>');
-                    $('#imMessageToSend').val('');
-                    //alert('sent, msgID=' + uuid);
+						if(('#loggedInAs').val() != "user1"){
+						$('#messages').append('<div>' +
+								'<span class="imUsername">' + $('#logInId').val() + '</span>' +
+								'<span class="imMessage">' + $('#imMessageToSend').val() + '</span>' +
+								'</div>');
+						$('#imMessageToSend').val('');
+						//alert('sent, msgID=' + uuid);
+					}
                 },
                 function() {
                     alert("IM send failed");
@@ -138,12 +140,14 @@ KandyAPI.Phone.addToPersonalAddressBook(
 		
 		var uuid = KandyAPI.Phone.sendIm('user2@heliograph2.com', $('#imMessageToSend').val(),
                 function(result) {
+				if(('#loggedInAs').val() != "user2"){
                     $('#messages').append('<div>' +
                             '<span class="imUsername">' + $('#logInId').val() + '</span>' +
                             '<span class="imMessage">' + $('#imMessageToSend').val() + '</span>' +
                             '</div>');
                     $('#imMessageToSend').val('');
                     //alert('sent, msgID=' + uuid);
+					}
                 },
                 function() {
                     alert("IM send failed");
@@ -152,12 +156,14 @@ KandyAPI.Phone.addToPersonalAddressBook(
 		
 		var uuid = KandyAPI.Phone.sendIm('user3@heliograph2.com', $('#imMessageToSend').val(),
                 function(result) {
+				if(('#loggedInAs').val() != "user3"){
                     $('#messages').append('<div>' +
                             '<span class="imUsername">' + $('#logInId').val() + '</span>' +
                             '<span class="imMessage">' + $('#imMessageToSend').val() + '</span>' +
                             '</div>');
                     $('#imMessageToSend').val('');
                     //alert('sent, msgID=' + uuid);
+					}
                 },
                 function() {
                     alert("IM send failed");
@@ -166,12 +172,14 @@ KandyAPI.Phone.addToPersonalAddressBook(
 		
 		var uuid = KandyAPI.Phone.sendIm('user4@heliograph2.com', $('#imMessageToSend').val(),
                 function(result) {
+				if(('#loggedInAs').val() != "user4"){
                     $('#messages').append('<div>' +
                             '<span class="imUsername">' + $('#logInId').val() + '</span>' +
                             '<span class="imMessage">' + $('#imMessageToSend').val() + '</span>' +
                             '</div>');
                     $('#imMessageToSend').val('');
                     //alert('sent, msgID=' + uuid);
+					}
                 },
                 function() {
                     alert("IM send failed");
@@ -180,16 +188,18 @@ KandyAPI.Phone.addToPersonalAddressBook(
 		
 		var uuid = KandyAPI.Phone.sendIm('user5@heliograph2.com', $('#imMessageToSend').val(),
                 function(result) {
-                    $('#messages').append('<div>' +
-                            '<span class="imUsername">' + $('#logInId').val() + '</span>' +
-                            '<span class="imMessage">' + $('#imMessageToSend').val() + '</span>' +
-                            '</div>');
-                    $('#imMessageToSend').val('');
-                    //alert('sent, msgID=' + uuid);
-                },
-                function() {
-                    alert("IM send failed");
-                }
+				if(('#loggedInAs').val() != "user5"){
+						$('#messages').append('<div>' +
+								'<span class="imUsername">' + $('#logInId').val() + '</span>' +
+								'<span class="imMessage">' + $('#imMessageToSend').val() + '</span>' +
+								'</div>');
+						$('#imMessageToSend').val('');
+						//alert('sent, msgID=' + uuid);
+					},
+					}
+				function() {
+					alert("IM send failed");
+				}
         );
     };
 
