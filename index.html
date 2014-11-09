@@ -3,6 +3,9 @@
 		<!-- Page Title -->
         <title>Heliograph</title>
 		
+		<!-- Stylesheet -->
+		<link rel="stylesheet" type="text/css" href="stylesheet.css">
+		
 		<!-- All three files required for Kandy  -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script src="https://kandy-portal.s3.amazonaws.com/public/javascript/fcs/1.0.0/fcs.js" ></script>
@@ -255,16 +258,22 @@ KandyAPI.Phone.addToPersonalAddressBook(
 
 <body onload="setup()" style="width:500px;">
 <h2>Heliograph</h2>
+<form id="loginForm">
+					<span id="login-title">Welcome Guest! Please login.</span>
+		
+					<br /> <br /><br /><br />
 
+					<span id="login-text">
+					Username: <input id="logInId" type="text"/><br/>
+					Password: <input id="passwd" type="password"/><br/>
+					</span>
+					<input id="loginBtn" type="button" value="Log in" onclick="login();return false;"/>
+					<input id="loginBtn" type="reset"   value="Clear" />
+				</form>
 <div id="loggedIn" style="display:none">
    Hello <span id="loggedInAs"></span>. &nbsp;&nbsp;&nbsp;&nbsp;
     <input id="logoutBtn" type="button" value="Log Out" onclick="logout()" />
 </div>
-<form id="loginForm">
-    Username: <input id="logInId" type="text"/><br/>
-    Password: <input id="passwd" type="password"/><br/>
-    <input id="loginBtn" type="button" value="Log in" onclick="login();return false;"/>
-</form>
 <br/>
 <br/>
 <div id="chat" style="display:none">
