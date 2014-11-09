@@ -43,7 +43,6 @@
             listeners: {
 					loginsuccess: function () {
 						changeUIState('LOGGED_IN');
-						loadContacts();
 						setInterval(getIms, 5000);
 					},
 					loginfailed: function () { alert("Login failed");}
