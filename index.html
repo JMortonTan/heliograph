@@ -19,7 +19,6 @@
 
     // this is called when page is done loading to set up (initialize) the KandyAPI.Phone
     setup = function() {
-
         // initialize KandyAPI.Phone, passing a config JSON object that contains listeners (event callbacks)
         KandyAPI.Phone.setup({
             // respond to Kandy events...
@@ -27,7 +26,7 @@
                 loginsuccess: function () {
                     changeUIState('LOGGED_IN');
                     setInterval(getIms, 5000);
-                },
+                }
                 loginfailed: function () { alert("Login failed");}
             }
         });
