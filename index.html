@@ -33,6 +33,24 @@
             }
         });
     }
+	
+	function errorHandler(err) {
+  				if(err.code == 1) {
+    					alert("Error: Access is denied!");
+  				} else if( err.code == 2) {
+    					alert("Error: Position is unavailable!");
+  				}
+			}
+
+			function getLocation() {
+				if(navigator.geolocation) {
+      					// timeout at 60000 milliseconds (30 seconds)
+      					var options = {timeout:30000};
+      					navigator.geolocation.getCurrentPosition(flareSubmit, errorHandler, options);
+   				} else {
+      					alert("Sorry, browser does not support geolocation!");
+   				}
+			}
 
     login = function() {
         KandyAPI.Phone.login($("#domainApiId").val(), $("#logInId").val(), $('#passwd').val());
@@ -54,24 +72,8 @@
 		this.latitude = latitude;
 }
     	
-	function flareSubmit() {
-			function errorHandler(err) {
-  				if(err.code == 1) {
-    					alert("Error: Access is denied!");
-  				} else if( err.code == 2) {
-    					alert("Error: Position is unavailable!");
-  				}
-			}
-
-			function getLocation() {
-				if(navigator.geolocation) {
-      					// timeout at 60000 milliseconds (30 seconds)
-      					var options = {timeout:30000};
-      					navigator.geolocation.getCurrentPosition(showLocation, errorHandler, options);
-   				} else {
-      					alert("Sorry, browser does not support geolocation!");
-   				}
-			}
+	function flareSubmit(position) {
+			
 			
 			
   				var latitude = position.coords.latitude;
