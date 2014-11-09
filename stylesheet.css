@@ -101,3 +101,19 @@ body {
 	font-size: 18px;
 	color: #000000;
 }
+
+/*====================================
+*		TABLE
+*====================================*/
+table {
+	background-color: #FFFFFF;
+	border: 1px solid #FFFFFF;
+	}
+	
+td {
+	background-color: #CDCCE0;
+	}
+
+tr {
+	background-color: #E1E1E3;
+}
