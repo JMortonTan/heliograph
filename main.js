@@ -154,6 +154,7 @@
                 $('#contactsAndDirSearch').hide();
                 $("#myContacts div:not(:first)").remove();
                 $("#chat").hide();
+				$("#messages").hide();
                 break;
             case 'LOGGED_IN':
                 $('#loggedInAs').text($('#logInId').val());
@@ -161,6 +162,7 @@
                 $("#loggedIn").show();
                 $('#contactsAndDirSearch').show();
                 $("#chat").show();
+				$("#messages").hide();
                 break;
         }
     }
