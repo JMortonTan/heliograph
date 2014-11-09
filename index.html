@@ -45,26 +45,20 @@
     };
 	
 	flareObj = function(user, hero, description, category) {
-		this.id = new Date().getTime();
-		this.user = user;
-		this.hero = hero;
-		this.description = description;
-		this.category = category;
-		this.latitude = window.latitude;
+		this.id = new Date().getTime(),
+		this.user = user,
+		this.hero = hero,
+		this.description = description,
+		this.category = category,
+		this.latitude = window.latitude,
 		this.longitude = window.longitude;
-		
-		this.number = 5;
 }
     	
 	function flareSubmit() {
-			
-			getLocation();
-			
+						
 			function showLocation(position) {
   				window.latitude = position.coords.latitude;
   				window.longitude = position.coords.longitude;
-  
-				alert(window.longitude);
 			}
 
 			function errorHandler(err) {
